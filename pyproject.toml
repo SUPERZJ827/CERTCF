@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name = "evaluator-audit-research"
+version = "0.0.1"
+description = "CertCF: semantics-certified counterfactual testing for agent evaluators"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "PyYAML>=6.0"]
+agentdojo = ["agentdojo @ git+https://github.com/sequrity-ai/agentdojo.git@357c80dea9af34323f709c3505d9e6d224654c7e"]
+# Install benchmark extras in separate environments to avoid dependency conflicts.
+appworld = ["appworld @ git+https://github.com/StonyBrookNLP/appworld.git@42b5bcf3cd334fee33f0c37c02070a9f5807add5"]
+thinkingbox = [
+    "thinkingbox @ git+https://github.com/microsoft/thinkingbox.git@40c1212f9582ca90175079bc313e530e9e9a4981",
+    "tb_business_ops_servers_202606 @ git+https://github.com/microsoft/thinkingbox-data.git@fcaba4c1a9debec42fda7f15bf29fe6d6b46c431#subdirectory=servers/tb_business_ops_servers_202606",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-q"]
+pythonpath = [".", "src", "scripts", "reference/agentdojo/src"]
