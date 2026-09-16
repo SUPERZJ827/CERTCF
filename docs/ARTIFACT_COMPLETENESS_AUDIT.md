@@ -7,7 +7,13 @@ repository with the full execution archive.
 
 ## Already public
 
-- The core Python package in `src/evaluator_audit/`.
+- The core Python package in `src/evaluator_audit/`, including the shared
+  certification package (`certification/`, 445 physical LOC) and the AppWorld
+  and ThinkingBox evidence adapters (`adapters/`, 59 physical LOC), with their
+  unit tests. This package consolidates the evidence contract used by the
+  primary relation scripts; it was exercised in the E4 strengthening
+  development, not in the primary R1/R2A/R3 runs. The E4 and final-strengthening
+  scripts themselves are not included.
 - The deterministic toy evaluator, transformation, runner, and tests.
 - The benchmark protocol and analysis scripts under `scripts/`.
 - Pinned upstream references in `pyproject.toml` and

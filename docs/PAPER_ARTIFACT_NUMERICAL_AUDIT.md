@@ -1,7 +1,7 @@
 # Paper–Artifact Numerical Audit
 
-This audit compares the current SQJ manuscript (`issta2027/main.tex` and
-`issta2027/appendix.tex`) with the compact public ledgers, expected-output
+This audit compares the current SQJ manuscript (`paper_sqj/main.tex`, which
+inlines its appendices) with the compact public ledgers, expected-output
 snapshots, README, and `scripts/reproduce_paper_tables.py`. It is a
 read-only consistency audit: no experiment was rerun and no manuscript
 number was changed. A `NOT_PUBLICLY_VERIFIABLE` entry means that the paper

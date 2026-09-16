@@ -57,7 +57,9 @@ recall, or implementation-level mutation effectiveness.
 ## Repository structure
 
 ```text
-src/evaluator_audit/   Core data models, evaluator adapter, runner, and contracts
+src/evaluator_audit/   Core data models, evaluator adapter, runner, and contracts;
+                       certification/ (shared evidence certificates) and
+                       adapters/ (AppWorld and ThinkingBox evidence adapters)
 examples/toy/          Small deterministic end-to-end example
 scripts/               Benchmark protocols and historical result analyses
 tests/                 Unit and protocol-contract tests
