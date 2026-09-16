@@ -1,0 +1,116 @@
+{
+  "contamination": {
+    "issue_pr_search_performed": false,
+    "llm_api_calls": 0
+  },
+  "counts": {
+    "COMPENSATED_OMISSION": 0,
+    "CONJUNCTIVE_OMISSION_CERTIFIED": 5,
+    "CONJUNCTIVE_OMISSION_FAILED": 0,
+    "CONJUNCTIVE_OMISSION_UNKNOWN": 5,
+    "MULTI_REQUIREMENT_DAMAGE": 0,
+    "OMISSION_EXECUTION_INVALID": 0,
+    "R3_FALSE_ACCEPTANCE_CANDIDATE": 0,
+    "SENSITIVE": 5,
+    "attempted": 10,
+    "baseline_replay_success": 5,
+    "evaluator_comparisons": 5,
+    "frozen_pilot_tasks": 10,
+    "omission_exactness_success": 10,
+    "omission_execution_success": 5,
+    "original_complete_effect_set_success": 5,
+    "phase4_0_candidate_effects": 71,
+    "phase4_0_candidate_tasks": 40,
+    "task_representatives": 40
+  },
+  "gates": [
+    "R3_CALIBRATION_INCONCLUSIVE"
+  ],
+  "phase": "4.1",
+  "stratification": {
+    "domain": {
+      "auto insurance": {
+        "attempted": 1,
+        "certified": 0,
+        "false_acceptance_candidates": 0,
+        "sensitive": 0
+      },
+      "consulting IT/HR": {
+        "attempted": 3,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      },
+      "retail/e-commerce": {
+        "attempted": 4,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      },
+      "travel/hospitality": {
+        "attempted": 2,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      }
+    },
+    "omitted_effect_type": {
+      "approval_approval_requests.create": {
+        "attempted": 1,
+        "certified": 0,
+        "false_acceptance_candidates": 0,
+        "sensitive": 0
+      },
+      "external_retail_toolset_loop_returns_models_rma_records.create": {
+        "attempted": 3,
+        "certified": 0,
+        "false_acceptance_candidates": 0,
+        "sensitive": 0
+      },
+      "external_retail_toolset_netsuite_models_inventory_records.update+external_retail_toolset_oms_models_order_line_items.create+external_retail_toolset_oms_models_orders.create": {
+        "attempted": 1,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      },
+      "okta_application_access_logs.create": {
+        "attempted": 2,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      },
+      "zendesk_tickets.create": {
+        "attempted": 1,
+        "certified": 0,
+        "false_acceptance_candidates": 0,
+        "sensitive": 0
+      },
+      "zendesk_tickets.update": {
+        "attempted": 2,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      }
+    },
+    "required_effect_count": {
+      "2": {
+        "attempted": 7,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      },
+      "3": {
+        "attempted": 1,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      },
+      "4": {
+        "attempted": 2,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      }
+    }
+  }
+}

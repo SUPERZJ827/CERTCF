@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Evaluate frozen CertCF cases against independently specified evaluator mutants."""
+"""Run modeled-fault controls over persisted CERTCF evidence.
+
+This module does not mutate or re-execute an official evaluator source. The
+legacy ``mutant`` identifiers are retained only for historical ledger
+compatibility.
+"""
 
 from __future__ import annotations
 

@@ -1,167 +1,182 @@
-# CertCF
+# CERTCF
 
-**Semantics-Certified Counterfactual Testing for Agent Evaluators**
+Evidence-gated counterfactual testing of AI agent benchmark evaluators.
 
-CertCF 研究如何测试 agent benchmark 的 evaluator：从一个已知成功的执行出发，对工具调用轨迹做局部修改，先检查修改是否真正实现了预期的任务语义关系，再判断 evaluator 的接受或拒绝是否合理。
+## Overview
 
-项目的核心问题是：**一个看起来不合理的 evaluator verdict，究竟来自 evaluator 错误，还是来自反事实测试自身无效？** 改了参数、换了调用顺序或删了一个调用，都不自动说明任务语义发生了预期变化。
+An agent benchmark evaluator is a test oracle: it decides whether an agent
+completed a task. A syntactically valid counterfactual is not necessarily a
+valid evaluator test. Changing an argument, swapping calls, or deleting a
+call may leave the user-visible task unchanged, may be repaired later, or may
+affect the wrong entity.
 
-本仓库提供研究代码、测试和依赖配置。按代码发布范围，不包含论文、benchmark 数据、执行轨迹、数据库快照、冻结产物或裁决结果文件。下面的数字是已有研究记录的摘要，不表示仅凭本次代码发布即可直接重新聚合全部历史结果。
-
-## 方法思路
-
-每个测试分开处理三个问题：
-
-1. **构造是否精确？** 只允许预先规定的局部编辑，并检查其他调用和参数是否保持不变。
-2. **语义关系是否成立？** 从独立重置的环境执行原始与反事实轨迹，检查响应、最终状态、任务效果及补偿行为。
-3. **Evaluator 是否符合预期？** 只有通过证书的测试才进入 evaluator 结果比较；异常结果还需要独立复核。
-
-证书依赖指令与效果的对应关系、可观测状态和预先声明的谓词。它不是对任意自然语言任务正确性的形式化保证。证据不足的案例标为 unknown，不计作 evaluator 成功或失败。
-
-## 做过哪些探索
-
-### R1：独立调用换序
-
-探索相邻的两个独立工具调用交换顺序后，evaluator 是否保持相同判定。静态筛选排除参数依赖、状态冲突和显式顺序要求；运行时进一步要求对齐后的完整响应、最终状态和输出一致。
-
-- AgentDojo：184 个候选调用对中，157 个通过证书，覆盖 22 个任务；157/157 保持判定不变。另有 26 个因原始执行重放失败而 unknown，1 个因最终状态不一致而未通过。
-- AppWorld：18 个候选调用对中按停止规则尝试了 6 个，5 个通过证书且保持判定不变；1 个构造失败，12 个未执行。
-
-这一探索建立了可执行的语义保持测试，也说明候选数量、已执行数量和认证数量不能混用。
-
-### R2 → R2A：从字面参数变化到任务效果违反
-
-初始 R2 将与 prompt 字面量匹配的一个参数改掉，尝试把它作为任务违反。104 个候选参数来自 69 个 AgentDojo 任务；10 任务 pilot 得到 7 个名义证书，其中出现 5 个表面上的 false acceptance。
-
-最初的源码审计没有确认任何 evaluator 缺陷：3 个接受被认为合理、1 个任务存在歧义、1 个证书无效。后续 outcome-blind Claude 裁决认为其中两个城市查询案例违反了动作层要求，但它们输出相同，且未满足冻结的任务效果证书。因此，不能把五个信号报告成已确认缺陷，也不能说所有更宽泛的动作义务解释都被否定。
-
-R2A 因而要求更具体的证据：修改后的操作成功产生错误的持久效果，正确效果缺失，且没有后续补偿。
-
-- AgentDojo：9/9 个校准案例通过证书并被 evaluator 拒绝。
-- ThinkingBox：30 个候选参数中，29 个通过证书，覆盖 16 个任务；29/29 被拒绝。
-
-这里的主要教训是：**参数不匹配，不等于任务效果失败。**
-
-### R3 → R3v2：孤立删除一个必要效果
-
-探索多要求任务只完成部分要求时，evaluator 是否能拒绝。删除一个效果的生产调用后，证书要求目标效果缺失、其他已明确对应到指令的要求仍成立，且没有替代调用补偿。
-
-ThinkingBox 的初始 10 任务校准中，5 个案例通过证书并被拒绝；另外 5 个在原始效果检查阶段被阻断。诊断发现了要求分解错误、效果别名或不独立，以及整条记录相等检查误把合法的后续字段更新当成失败等问题。
-
-R3v2 强化了不同指令片段的对应关系，并使用稳定的任务相关字段投影。它没有放宽“只破坏一个要求”的核心条件。
-
-- ThinkingBox：对 30 个此前未暴露任务重新筛选，只保留 4 个任务、11 个可省略效果；这是机会筛选数量，不是新增的执行结果。
-- AppWorld：147 个 train/dev 任务中保留 6 个严格候选任务；每个任务执行一次 omission，6/6 通过证书并被拒绝。
-- ToolSandbox：检查了 129 个基础场景及其 1,032 个变体，但缺少官方或可机械重建的成功参考轨迹，因此没有执行 omission。
-
-### R4：禁止的附带效果
-
-探索插入一个合法调用，使它违反显式禁止事项，同时保留正向要求。对三个 benchmark 的 710 个可用任务筛选后，只得到 2 个候选，且都来自 ThinkingBox，未达到预先规定的执行门槛。**没有执行 R4 扰动，也没有 R4 evaluator 结果。**
-
-## 核心执行结果
-
-下表分母仅包括通过证书的案例，不代表 benchmark 总体；调用对、参数编辑和任务也不是可直接合并的独立统计单位。
-
-| 关系 | Benchmark | 认证案例 | Evaluator 表现 |
-|---|---|---:|---|
-| R1：调用换序 | AgentDojo | 157 | 157/157 判定不变 |
-| R1：调用换序控制 | AppWorld | 5 | 5/5 判定不变 |
-| R2A：错误任务效果 | AgentDojo | 9 | 9/9 拒绝 |
-| R2A：错误任务效果 | ThinkingBox | 29 | 29/29 拒绝 |
-| R3：孤立效果省略 | ThinkingBox | 5 | 5/5 拒绝 |
-| R3v2：孤立效果省略 | AppWorld | 6 | 6/6 拒绝 |
-| E3：前瞻 R2A 验证 | AppWorld | 6 | 6/6 拒绝 |
-
-**在研究覆盖的认证关系和案例内，没有发现已确认的官方 evaluator 缺陷。** 这不等于 evaluator 普遍正确，也不等于所有被排除的测试都无效。
-
-## 补充验证
-
-### E1：能否检测人工植入的 evaluator 故障？
-
-对四类预先规定的故障进行 mutation testing，包括参考顺序过拟合、合取条件弱化、删除必要条件，以及把值相等检查弱化为存在性检查。
-
-- 总计 124 个 mutants，其中 120 个保留了原始通过基线。
-- 认证证据激活了其中 102 个，检测到 68 个，即 **68/102 = 66.7%**；按全部有效 mutants 计为 **68/120 = 56.7%**。
-- 34 个被激活但存活，另有 18 个未被覆盖。部分目标字段检查被弱化后，关联 ID 或 URL 的其他检查仍能拒绝错误执行。
-
-这一结果说明测试能发现部分预设故障，但没有建立历史真实缺陷召回率。崩溃不计作成功检测。
-
-### E2：证书过滤提高了什么，又损失了什么？
-
-对同一组 49 个既有执行案例，回顾性比较四个逐渐严格的 gate。Claude Sonnet 4.6 在看不到 evaluator 判定、gate 标签和证书的条件下进行语义裁决。
-
-| 筛选方式 | 已保留且裁决明确的测试中，语义违反比例 | 被裁决有效的测试保留率 |
-|---|---:|---:|
-| 仅字面量筛选 | 43/46（93.5%） | 43/43（100%） |
-| 执行成功检查 | 43/46（93.5%） | 43/43（100%） |
-| 简单效果检查 | 42/45（93.3%） | 42/43（97.7%） |
-| 完整任务效果证书 | 37/37（100%） | 37/43（86.0%） |
-
-完整证书过滤掉了全部 3 个裁决明确的无效测试，也排除了 6 个被裁决为有效违反的测试。实际保留了 38 个案例，其中 1 个仍有歧义，故 100% 不能解释成全部保留案例都已确认有效。
-
-六个被排除的有效违反中，三个涉及持久效果不匹配，另三个涉及查询数量或城市等动作义务。这里既有保守过滤造成的损失，也有证书覆盖范围与更宽泛任务语义的差异。
-
-所有 gate 在 ThinkingBox 操作性对照中触达同样的 58 个 mutants、检测到同样的 24 个；过滤证据与检测证据来自不同案例群，不能据此宣称建立了同案例的有效性—检测能力前沿。也没有产生 evaluator 缺陷声明，因此缺陷声明 precision 为 0/0、未定义，而不是 100%。
-
-### E3：前瞻验证
-
-在 6 个此前未暴露的 AppWorld 任务上应用已冻结 gate，全部通过证书、被 evaluator 拒绝，并被 Claude 判为语义违反。不过它们都涉及 Spotify playlist title，四个 gate 保留的案例完全一致。这支持一个效果族内的前瞻迁移，不支持跨效果类型泛化或 gate 区分能力。
-
-## 得到的结论与边界
-
-- **测试有效性、故障检测能力和覆盖范围需要分别报告。** 更严格的证书减少无效测试，但也会排除真实或更宽泛语义下的违反。
-- **可重放性和效果可观测性是实际瓶颈。** 官方参考执行、独立重置、稳定谓词和因果隔离要求会显著缩小可执行测试集合。
-- **机器可检查不等于完整语义正确。** 指令对应关系和状态假设仍可能出错；动作义务也可能超出持久效果证书。
-- **裁决结果有明确限制。** E2/E3 使用单一 LLM 裁决者，没有独立人类校准；E2 是回顾性分析，E3 样本小且效果类型单一。
-- **没有验证普遍可靠性或真实缺陷召回率。** 候选之间可能相关，人工植入故障与所研究关系对齐，也没有完整语义真值总体可用于估计覆盖召回率。
-
-## 代码结构
+CERTCF makes this boundary explicit:
 
 ```text
-src/evaluator_audit/   核心数据模型、变换与 evaluator 接口、比较和记录逻辑
-examples/toy/          最小确定性示例
-scripts/phase0_*.py    AppWorld 静态筛选、双分支重放和可观测性校准
-scripts/phase1_*.py    AgentDojo R1 校准、冻结与执行
-scripts/phase2_*.py    R2、源码审计及 R2A
-scripts/phase3_*.py    ThinkingBox R2A
-scripts/phase4_*.py    R3/R3v2 分解、诊断与跨 benchmark 机会筛选
-scripts/phase5_*.py    R4 机会筛选
-scripts/validation_*  E1/E2/E3 验证与分析
-tests/                单元测试
+generate -> replay -> certify -> compare -> confirm
 ```
 
-## 环境与运行
+The original and counterfactual executions are replayed from independently
+rebuilt initial states. Requests, responses, task-relevant state projections,
+outputs, and compensation checks are recorded before the evaluator verdict is
+interpreted. A candidate is classified as certified, failed, or unknown. Only
+certified relation instances enter the evaluator comparison.
 
-建议使用 Python 3.11。各 benchmark 依赖可能冲突，应分别建立虚拟环境。
+The certificate is an operational sufficient condition under stated grounding
+and observability assumptions. It is not a complete formalization of natural
+language task meaning.
+
+## Paper
+
+**Testing the Test Oracle: Evidence-Gated Counterfactual Testing of AI Agent
+Benchmark Evaluators**
+
+The manuscript is under preparation. No publication metadata is asserted here.
+
+## Main findings
+
+- The rejected literal-based R2 produced five apparent false acceptances; the
+  independent audit confirmed zero task-effect evaluator defects (three
+  acceptances were justified, one task was ambiguous, and one certificate was
+  invalid).
+- In the certified AgentDojo R1 population, 157/157 call permutations kept the
+  evaluator verdict invariant.
+- In the certified R2A population, 38/38 task-critical effect violations were
+  rejected by the studied evaluators.
+- In the executed certified R3/R3v2 cases, 11/11 isolated omissions were
+  rejected.
+- Stronger validity requirements substantially reduce admissible opportunities:
+  for example, the ThinkingBox R3v2 scan reduced 30 held-out tasks to four
+  strict candidate tasks, while the R4 scan found two strict static candidates
+  among 710 usable tasks and executed none.
+
+These are relation- and benchmark-scoped observations. They do not establish
+general evaluator correctness, benchmark defect prevalence, general fault
+recall, or implementation-level mutation effectiveness.
+
+## Repository structure
+
+```text
+src/evaluator_audit/   Core data models, evaluator adapter, runner, and contracts
+examples/toy/          Small deterministic end-to-end example
+scripts/               Benchmark protocols and historical result analyses
+tests/                 Unit and protocol-contract tests
+artifacts/quick/       Compact frozen ledgers and representative metadata
+docs/                  Artifact, provenance, and reproducibility notes
+```
+
+## Installation
+
+The tested baseline is Python 3.11.
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev]'
-
-# 核心比较循环的测试，不需要 benchmark 数据。
-python -m pytest tests/test_models.py tests/test_runner.py tests/test_transformation_contract.py
-
-# 完整单元测试还需要 AgentDojo 及其依赖。
-python scripts/prepare_references.py agentdojo
-python -m pip install -e '.[agentdojo]'
-python -m pytest
 ```
 
-代码发布时，已有依赖环境下的 **30 项测试通过**，并验证了固定版本 AgentDojo 的获取。未重新运行全套 benchmark 实验或验证所有 extras 的全新安装。
+Benchmark integrations are optional and should be installed in separate
+environments because their dependencies conflict:
 
-`scripts/prepare_references.py` 固定以下 upstream 版本；不传名称时获取全部五个仓库：
+```bash
+python -m pip install -e '.[agentdojo]'
+python -m pip install -e '.[appworld]'
+python -m pip install -e '.[thinkingbox]'
+```
 
-| 依赖 | Commit |
-|---|---|
-| AgentDojo | `357c80dea9af34323f709c3505d9e6d224654c7e` |
-| AppWorld | `42b5bcf3cd334fee33f0c37c02070a9f5807add5` |
-| ThinkingBox | `40c1212f9582ca90175079bc313e530e9e9a4981` |
-| ThinkingBox data | `fcaba4c1a9debec42fda7f15bf29fe6d6b46c431` |
-| ToolSandbox | `165848b9a78cead7ca7fe7c89c688b58e6501219` |
+The pinned upstream commits are listed in
+[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). Installing an extra does
+not download benchmark data automatically.
 
-AppWorld 和 ThinkingBox 还分别提供 `.[appworld]`、`.[thinkingbox]` 安装选项。AppWorld runtime data 需按对应版本的 upstream 工具单独准备；`CERTCF_APPWORLD_ROOT` 指定数据根目录，默认是本仓库的 `data/appworld`。
+## Unit tests
 
-阶段脚本是研究执行入口，**不是从空仓库一键重跑全部历史结果的流水线**。后续阶段需要前序执行生成的候选、队列、证书、结果及冻结配置；部分验证入口还需要未随本次代码发布提供的协议或人工准备输入。请先检查脚本的输入路径与 freeze/run 顺序。冻结代码的路径适配会改变代码哈希，不能把新的执行冒充为原始冻结运行。
+Run the dependency-free test suite with:
 
-确定性候选筛选、轨迹执行、机器认证和 evaluator 比较不调用 LLM API。可选的 Claude 裁决脚本是独立流程，需要自行配置 CLI、访问权限、盲化输入包，以及 `CERTCF_ADJUDICATION_ROOT` 和 `CERTCF_ADJUDICATION_PROMPT`，可能产生调用费用。
+```bash
+python -m pytest -q
+```
+
+Tests that require an optional benchmark are skipped when that benchmark is
+not installed. The toy runner and core contracts run without benchmark data.
+
+## Lightweight result verification
+
+The compact ledgers in `artifacts/quick/final_ledgers/` are projections of the
+historical frozen result records. Recompute the headline table with:
+
+```bash
+python scripts/reproduce_paper_tables.py
+```
+
+This command reads the included ledger; it does not rerun benchmark agents,
+call an LLM API, or claim that the full historical record is present.
+
+## Representative end-to-end example
+
+The dependency-free toy example exercises transformation applicability,
+evaluation, timeout/error capture, and structured evidence:
+
+```bash
+python scripts/reproduce_toy_case.py
+```
+
+The benchmark-specific R1, R2, R2A, and R3/R3v2 protocols remain available in
+`scripts/`. Their exact benchmark inputs, reset environments, and full case
+bundles are not distributed here. The compact representative manifests under
+`artifacts/quick/manifests/` identify cases and expected relation outcomes;
+they are provenance records, not a claim that those benchmark executions can
+be reproduced from this repository alone.
+
+## Benchmarks and versions
+
+The historical study used AppWorld, AgentDojo, ThinkingBox, ThinkingBox data,
+and ToolSandbox. The pinned commits and the distinction between executable,
+ledger-verifiable, and historical-only results are documented in
+[docs/RESULT_PROVENANCE.md](docs/RESULT_PROVENANCE.md).
+
+## Artifact scope
+
+### Lightweight verification
+
+Small JSON ledgers, errata, expected headline values, and case metadata are
+included so reviewers can inspect provenance and recompute selected counts.
+
+### Representative reproduction
+
+The core implementation and the deterministic toy pipeline are runnable from a
+clean checkout. Benchmark protocol scripts are preserved for users who have
+the corresponding pinned upstream environments and data.
+
+### Full historical audit record
+
+The complete research workspace is intentionally not in GitHub. It contains
+approximately 17,539 evidence files and 86.8 GB of database snapshots,
+execution traces, benchmark data, and intermediate artifacts. See
+[docs/FULL_AUDIT_MANIFEST.md](docs/FULL_AUDIT_MANIFEST.md).
+
+## Limitations
+
+- No confirmed real evaluator defect was found in the certified denominators.
+- The results do not establish general evaluator correctness or real-defect
+  recall.
+- E1 is a **modeled-fault control on persisted evidence**, not source mutation
+  and re-execution of an official evaluator. Its historical filenames may use
+  `mutation` or `mutant`, but those are legacy identifiers.
+- Semantic onboarding is benchmark-specific and depends on grounding,
+  observability, replayability, and stable task-effect predicates.
+- E2 is retrospective and phase-confounded; its semantic labels came from one
+  outcome-blind LLM adjudicator without human calibration.
+- R4 is an opportunity scan only: no R4 perturbation or evaluator outcome was
+  executed.
+- Some benchmark data and historical artifacts are too large or
+  redistribution-constrained for this repository.
+
+## Citation
+
+Please cite the manuscript title above until final publication metadata are
+available.
+
+## License
+
+No new license is asserted by this release. Add a repository license before
+redistributing the code if the project policy requires one.

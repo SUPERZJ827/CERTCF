@@ -1,0 +1,79 @@
+{
+  "BEHAVIORALLY_EQUIVALENT_MUTATION": 0,
+  "COMPENSATED_EFFECT": 0,
+  "R2A_FALSE_ACCEPTANCE_CANDIDATE": 0,
+  "SENSITIVE": 9,
+  "TASK_CRITICAL_VIOLATION_CERTIFIED": 9,
+  "TASK_CRITICAL_VIOLATION_FAILED": 0,
+  "TASK_CRITICAL_VIOLATION_UNKNOWN": 0,
+  "agentdojo_role": "CALIBRATION_TARGET",
+  "attempted": 9,
+  "baseline_replay_success": 9,
+  "evaluator_comparisons": 9,
+  "exclusion_reasons": {},
+  "heldout_population": 9,
+  "independent_audit": {},
+  "issue_pr_search_performed": false,
+  "llm_api_calls": 0,
+  "mutation_exactness_success": 9,
+  "original_effect_witness_reproduced": 9,
+  "perturbed_execution_success": 9,
+  "stratification": {
+    "argument_type": {
+      "exact_string": {
+        "SENSITIVE": 6,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 6,
+        "attempted": 6
+      },
+      "string_identifier": {
+        "SENSITIVE": 3,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 3,
+        "attempted": 3
+      }
+    },
+    "effect_type": {
+      "channel_message.body": {
+        "SENSITIVE": 1,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 1,
+        "attempted": 1
+      },
+      "channel_message.recipient": {
+        "SENSITIVE": 3,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 3,
+        "attempted": 3
+      },
+      "direct_message.body": {
+        "SENSITIVE": 1,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 1,
+        "attempted": 1
+      },
+      "direct_message.recipient": {
+        "SENSITIVE": 2,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 2,
+        "attempted": 2
+      },
+      "transaction.recipient": {
+        "SENSITIVE": 1,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 1,
+        "attempted": 1
+      },
+      "user_account.password": {
+        "SENSITIVE": 1,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 1,
+        "attempted": 1
+      }
+    },
+    "suite": {
+      "banking": {
+        "SENSITIVE": 2,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 2,
+        "attempted": 2
+      },
+      "slack": {
+        "SENSITIVE": 7,
+        "TASK_CRITICAL_VIOLATION_CERTIFIED": 7,
+        "attempted": 7
+      }
+    }
+  }
+}

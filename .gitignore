@@ -5,7 +5,11 @@ __pycache__/
 .venv*/
 build/
 dist/
-artifacts/
+artifacts/*
+!artifacts/
+!artifacts/quick/
+!artifacts/quick/**
+!artifacts/full_audit_manifest.json
 reference/
 data/
 experiments/

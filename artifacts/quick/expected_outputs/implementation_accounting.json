@@ -1,0 +1,11 @@
+{
+  "source": "historical static implementation accounting",
+  "shared_certification_core_physical_loc": 445,
+  "shared_adapter_physical_loc": 59,
+  "other_package_physical_loc": 608,
+  "research_scripts_physical_loc": 14025,
+  "tests_physical_loc": 865,
+  "retained_evidence_files": 17539,
+  "historical_evidence_size_gb_approx": 86.8,
+  "interpretation": "size accounting only; not labor cost, mutation effectiveness, or runtime performance"
+}

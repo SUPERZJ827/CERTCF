@@ -1,3 +1,7 @@
+import pytest
+
+pytest.importorskip("agentdojo")
+
 from scripts.phase1_3_agentdojo_common import call_data, canonical_bytes
 from scripts.phase1_3_retry1_adapter import persisted_call_to_runtime
 

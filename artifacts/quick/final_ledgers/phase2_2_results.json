@@ -1,0 +1,29 @@
+{
+  "ambiguous": 1,
+  "audit_queue_sha256": "59ef1c91661a6750740f72b9d3e870cba9c8ca5ae572ea739f1357d9268801da",
+  "by_argument_type": {
+    "exact_string": {
+      "SEMANTIC_CERTIFICATE_INVALID": 1,
+      "TASK_SEMANTICS_AMBIGUOUS": 1,
+      "candidates": 2
+    },
+    "location_string": {
+      "EVALUATOR_ACCEPTANCE_JUSTIFIED": 2,
+      "candidates": 2
+    },
+    "string_identifier": {
+      "EVALUATOR_ACCEPTANCE_JUSTIFIED": 1,
+      "candidates": 1
+    }
+  },
+  "certificate_invalid": 1,
+  "confirmed": 0,
+  "false_acceptance_candidates": 5,
+  "gate": "R2_SIGNAL_NOT_CONFIRMED",
+  "issue_pr_search_performed": false,
+  "justified": 3,
+  "llm_api_calls": 0,
+  "new_mutations_generated": 0,
+  "reproduction_unstable": 0,
+  "unknown": 0
+}

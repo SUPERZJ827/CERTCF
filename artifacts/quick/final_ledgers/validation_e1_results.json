@@ -1,0 +1,58 @@
+{
+  "by_benchmark": {
+    "AgentDojo": {
+      "INVALID_MUTANT": 4,
+      "KILLED": 22,
+      "total": 26
+    },
+    "AppWorld": {
+      "KILLED": 12,
+      "UNCOVERED": 6,
+      "total": 18
+    },
+    "ThinkingBox": {
+      "KILLED": 34,
+      "SURVIVED": 34,
+      "UNCOVERED": 12,
+      "total": 80
+    }
+  },
+  "by_fault_class": {
+    "ALL_TO_ANY": {
+      "KILLED": 11,
+      "total": 11
+    },
+    "DROP_REQUIRED_CONJUNCT": {
+      "KILLED": 23,
+      "SURVIVED": 17,
+      "UNCOVERED": 17,
+      "total": 57
+    },
+    "REFERENCE_TRACE_OVERFIT": {
+      "INVALID_MUTANT": 4,
+      "KILLED": 22,
+      "total": 26
+    },
+    "WEAKEN_VALUE_TO_EXISTENCE": {
+      "KILLED": 12,
+      "SURVIVED": 17,
+      "UNCOVERED": 1,
+      "total": 30
+    }
+  },
+  "certified_test_coverage_of_valid_mutants": 0.85,
+  "control_type": "seeded evaluator faults on persisted certified evidence",
+  "llm_api_calls": 0,
+  "mutants_activated": 102,
+  "mutants_invalid": 4,
+  "mutants_killed": 68,
+  "mutants_survived": 34,
+  "mutants_total": 124,
+  "mutants_uncovered": 18,
+  "mutants_valid": 120,
+  "mutation_score_activated": 0.6666666666666666,
+  "official_benchmark_defects_claimed": 0,
+  "phase": "E1",
+  "prior_artifacts_modified": false,
+  "trajectory_executions": 0
+}

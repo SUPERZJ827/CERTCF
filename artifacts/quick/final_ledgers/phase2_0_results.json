@@ -1,0 +1,36 @@
+{
+  "agentdojo_commit": "357c80dea9af34323f709c3505d9e6d224654c7e",
+  "argument_type_distribution": {
+    "date": 10,
+    "exact_string": 65,
+    "integer": 1,
+    "location_string": 18,
+    "monetary_float": 1,
+    "string_identifier": 9
+  },
+  "benchmark_version": "v1.2.1",
+  "candidate_arguments": 104,
+  "candidate_tasks": 69,
+  "exact_prompt_literal_matches": 120,
+  "gate": "R2_READY_FOR_CALIBRATION_PILOT",
+  "llm_api_calls": 0,
+  "mutation_rules_sha256": "b0a19fdf09452d75fc37e42d8c96af73c2e584faf7557139dd9770c605b2136a",
+  "perturbed_evaluator_executions": 0,
+  "perturbed_evaluator_outcomes_observed": 0,
+  "perturbed_trajectory_executions": 0,
+  "rejection_counts": {
+    "ambiguous_grounding": 36,
+    "no_literal_grounding": 308,
+    "value_not_safely_perturbable": 16
+  },
+  "scanner_sha256": "760d0e46910d6b8304787bb4e81f67ec671629f392d775664ef6a9cf2c972d06",
+  "suite_distribution": {
+    "banking": 16,
+    "slack": 24,
+    "travel": 20,
+    "workspace": 44
+  },
+  "total_gt_arguments": 464,
+  "total_gt_calls": 339,
+  "total_tasks": 97
+}

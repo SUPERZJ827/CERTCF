@@ -1,0 +1,40 @@
+{
+  "r1": {
+    "agentdojo_baseline_replay_unknown": 26,
+    "agentdojo_certified_invariant": 157,
+    "agentdojo_covered_tasks": 22,
+    "agentdojo_failed_relation_instances": 1,
+    "agentdojo_population_pairs": 184,
+    "appworld_attempted": 6,
+    "appworld_certified_invariant": 5,
+    "appworld_exact_pairs": 18
+  },
+  "r2": {
+    "apparent_false_acceptances": 5,
+    "arguments_scanned": 464,
+    "candidate_tasks": 69,
+    "confirmed_task_effect_defects": 0,
+    "literal_candidates": 104,
+    "pilot_tasks": 10
+  },
+  "r2a": {
+    "agentdojo_certified": 9,
+    "agentdojo_sensitive": 9,
+    "primary_certified": 38,
+    "thinkingbox_candidates": 30,
+    "thinkingbox_certified": 29,
+    "thinkingbox_sensitive": 29
+  },
+  "r3": {
+    "appworld_certified_sensitive": 6,
+    "thinkingbox_certified_sensitive": 5,
+    "thinkingbox_heldout_tasks": 30,
+    "thinkingbox_strict_candidate_tasks": 4,
+    "total_certified_sensitive": 11
+  },
+  "r4": {
+    "executed": 0,
+    "strict_static_candidates": 2,
+    "usable_tasks": 710
+  }
+}

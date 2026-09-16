@@ -1,0 +1,106 @@
+{
+  "detection_control": {
+    "adapter_unavailable_instances": 38,
+    "by_gate": {
+      "G0_LITERAL_ONLY": {
+        "fixed_operational_mutants": 60,
+        "killed": 24,
+        "killed_over_fixed_operational": 0.4,
+        "killed_over_reached": 0.41379310344827586,
+        "reached": 58,
+        "survived": 34,
+        "uncovered": 2
+      },
+      "G1_EXECUTION_SUCCESS": {
+        "fixed_operational_mutants": 60,
+        "killed": 24,
+        "killed_over_fixed_operational": 0.4,
+        "killed_over_reached": 0.41379310344827586,
+        "reached": 58,
+        "survived": 34,
+        "uncovered": 2
+      },
+      "G2_SIMPLE_EFFECT": {
+        "fixed_operational_mutants": 60,
+        "killed": 24,
+        "killed_over_fixed_operational": 0.4,
+        "killed_over_reached": 0.41379310344827586,
+        "reached": 58,
+        "survived": 34,
+        "uncovered": 2
+      },
+      "G3_FULL_TASK_EFFECT_CERTIFICATE": {
+        "fixed_operational_mutants": 60,
+        "killed": 24,
+        "killed_over_fixed_operational": 0.4,
+        "killed_over_reached": 0.41379310344827586,
+        "reached": 58,
+        "survived": 34,
+        "uncovered": 2
+      }
+    },
+    "equivalent_or_masked_mutants_resolved": false,
+    "intended_fault_instances": 98,
+    "operational_source_adapter_instances": 60,
+    "scope": "ThinkingBox source adapter only"
+  },
+  "gate_results": {
+    "G0_LITERAL_ONLY": {
+      "claim_audit_labels": {
+        "EVALUATOR_ACCEPTANCE_JUSTIFIED": 3,
+        "SEMANTIC_CERTIFICATE_INVALID": 1,
+        "TASK_SEMANTICS_AMBIGUOUS": 1
+      },
+      "confirmed_defect_claims": 0,
+      "official_pass_defect_claims": 5,
+      "retained_pairs": 49,
+      "retained_tasks": 36,
+      "unsupported_or_ambiguous_claims": 5
+    },
+    "G1_EXECUTION_SUCCESS": {
+      "claim_audit_labels": {
+        "EVALUATOR_ACCEPTANCE_JUSTIFIED": 3,
+        "SEMANTIC_CERTIFICATE_INVALID": 1,
+        "TASK_SEMANTICS_AMBIGUOUS": 1
+      },
+      "confirmed_defect_claims": 0,
+      "official_pass_defect_claims": 5,
+      "retained_pairs": 47,
+      "retained_tasks": 34,
+      "unsupported_or_ambiguous_claims": 5
+    },
+    "G2_SIMPLE_EFFECT": {
+      "claim_audit_labels": {
+        "EVALUATOR_ACCEPTANCE_JUSTIFIED": 3,
+        "SEMANTIC_CERTIFICATE_INVALID": 1,
+        "TASK_SEMANTICS_AMBIGUOUS": 1
+      },
+      "confirmed_defect_claims": 0,
+      "official_pass_defect_claims": 5,
+      "retained_pairs": 46,
+      "retained_tasks": 33,
+      "unsupported_or_ambiguous_claims": 5
+    },
+    "G3_FULL_TASK_EFFECT_CERTIFICATE": {
+      "claim_audit_labels": {},
+      "confirmed_defect_claims": 0,
+      "official_pass_defect_claims": 0,
+      "retained_pairs": 38,
+      "retained_tasks": 25,
+      "unsupported_or_ambiguous_claims": 0
+    }
+  },
+  "independent_semantic_adjudication": {
+    "existing_labels_apply_to_all_official_pass_claims": true,
+    "human_time_cost": "not recorded in persisted Phase 2.2 artifacts",
+    "semantic_precision_of_all_retained_tests_estimable": false,
+    "units_labeled": 5,
+    "units_unlabeled": 44
+  },
+  "llm_api_calls": 0,
+  "new_trajectory_executions": 0,
+  "phase": "E2_PRELIMINARY",
+  "shared_candidate_pairs": 49,
+  "shared_candidate_tasks": 36,
+  "status": "ADJUDICATION_REQUIRED_FOR_COMPLETE_ABLATION"
+}

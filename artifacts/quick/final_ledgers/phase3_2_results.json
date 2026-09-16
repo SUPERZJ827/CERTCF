@@ -1,0 +1,156 @@
+{
+  "candidate_level": {
+    "BEHAVIORALLY_EQUIVALENT_MUTATION": 0,
+    "COMPENSATED_EFFECT": 0,
+    "MUTATION_EXECUTION_INVALID": 0,
+    "R2A_FALSE_ACCEPTANCE_CANDIDATE": 0,
+    "SENSITIVE": 29,
+    "TASK_CRITICAL_VIOLATION_CERTIFIED": 29,
+    "TASK_CRITICAL_VIOLATION_FAILED": 1,
+    "TASK_CRITICAL_VIOLATION_UNKNOWN": 0,
+    "attempted": 30,
+    "baseline_replay_success": 30,
+    "evaluator_comparisons": 29,
+    "mutation_exactness_success": 30,
+    "original_effect_witness_success": 30,
+    "perturbed_execution_success": 30,
+    "population": 30
+  },
+  "case_ids": [
+    "test_case_ST008_003-3590ef091dec",
+    "test_doc_004-409e007f9ece",
+    "test_drv_001-ab983366adca",
+    "test_drv_002-00a9eaed8159",
+    "test_drv_002-a1fe2366a426",
+    "test_drv_002-e6beea988029",
+    "test_drv_003-8b5165dfb4f0",
+    "test_drv_003-cfc26d048471",
+    "test_drv_005-c6caaac70bb7",
+    "test_drv_006-29b72ee2914f",
+    "test_drv_006-86b4715580b3",
+    "test_drv_006-e83539b7662b",
+    "test_drv_007-37b1e0771e26",
+    "test_drv_011-25f2f2f37b70",
+    "test_drv_011-c75f6b725dc5",
+    "test_drv_013-58d06f7ab724",
+    "test_drv_013-80959f6caf1b",
+    "test_drv_013-f616cff241f0",
+    "test_drv_014-0506166f0583",
+    "test_drv_014-9ba46383c267",
+    "test_drv_023-9da28b4ab9d2",
+    "test_drv_023-b1a6395e1d59",
+    "test_drv_023-f8785a801bae",
+    "test_drv_101-0d711f1a4598",
+    "test_drv_101-66adfe5e2efe",
+    "test_drv_106-23eb3c04e3a0",
+    "test_drv_106-c42c222dc3d0",
+    "test_ie_006-9716ce563e7b",
+    "test_sa_013-e442ddb0ca93",
+    "test_swa_004-6294181abb7f"
+  ],
+  "contamination": {
+    "issue_pr_search_performed": false,
+    "llm_api_calls": 0
+  },
+  "gate": "THINKINGBOX_FULL_POPULATION_FULLY_SENSITIVE",
+  "phase": "3.2",
+  "stratification": {
+    "argument_type": {
+      "date_or_datetime": {
+        "candidates": 10,
+        "certified": 10,
+        "false_acceptance_candidates": 0,
+        "sensitive": 10
+      },
+      "exact_string": {
+        "candidates": 19,
+        "certified": 18,
+        "false_acceptance_candidates": 0,
+        "sensitive": 18
+      },
+      "string_identifier": {
+        "candidates": 1,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      }
+    },
+    "domain": {
+      "auto insurance": {
+        "candidates": 26,
+        "certified": 26,
+        "false_acceptance_candidates": 0,
+        "sensitive": 26
+      },
+      "consulting IT/HR": {
+        "candidates": 1,
+        "certified": 0,
+        "false_acceptance_candidates": 0,
+        "sensitive": 0
+      },
+      "neobank support": {
+        "candidates": 2,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      },
+      "retail/e-commerce": {
+        "candidates": 1,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      }
+    },
+    "effect_type": {
+      "Driver.date_of_birth": {
+        "candidates": 10,
+        "certified": 10,
+        "false_acceptance_candidates": 0,
+        "sensitive": 10
+      },
+      "Driver.license_number": {
+        "candidates": 9,
+        "certified": 9,
+        "false_acceptance_candidates": 0,
+        "sensitive": 9
+      },
+      "Driver.name": {
+        "candidates": 6,
+        "certified": 6,
+        "false_acceptance_candidates": 0,
+        "sensitive": 6
+      },
+      "OktaAppAccess.access_level": {
+        "candidates": 2,
+        "certified": 2,
+        "false_acceptance_candidates": 0,
+        "sensitive": 2
+      },
+      "PolicyDocument.document_type": {
+        "candidates": 1,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      },
+      "RMARecord.return_reason": {
+        "candidates": 1,
+        "certified": 1,
+        "false_acceptance_candidates": 0,
+        "sensitive": 1
+      },
+      "persisted_entity.access_type": {
+        "candidates": 1,
+        "certified": 0,
+        "false_acceptance_candidates": 0,
+        "sensitive": 0
+      }
+    }
+  },
+  "task_level": {
+    "population_tasks": 17,
+    "tasks_with_all_certified_mutations_sensitive": 16,
+    "tasks_with_at_least_one_certified_violation": 16,
+    "tasks_with_at_least_one_false_acceptance_candidate": 0,
+    "tasks_with_only_uncertified_mutations": 1
+  }
+}

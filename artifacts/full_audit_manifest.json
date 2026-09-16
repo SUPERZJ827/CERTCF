@@ -1,0 +1,30 @@
+{
+  "schema_version": "CERTCF_FULL_AUDIT_MANIFEST_V1",
+  "distribution_status": "documented_not_distributed",
+  "historical_evidence_files_approx": 17539,
+  "historical_total_size_gb_approx": 86.8,
+  "categories": [
+    "frozen queues and receipts",
+    "original and counterfactual execution evidence",
+    "request and response traces",
+    "initial and final state snapshots",
+    "evaluator outputs and certificates",
+    "calibration, diagnosis, errata, and reporting recovery",
+    "E1, E2, and E3 validation artifacts",
+    "opportunity scans and failed strengthening attempts",
+    "benchmark databases and runtime data"
+  ],
+  "public_substitutes": [
+    "artifacts/quick/final_ledgers",
+    "artifacts/quick/expected_outputs",
+    "artifacts/quick/manifests",
+    "artifacts/quick/errata",
+    "docs/RESULT_PROVENANCE.md"
+  ],
+  "exclusion_reasons": [
+    "repository size",
+    "benchmark redistribution constraints",
+    "database and trace sensitivity",
+    "redundant generated evidence"
+  ]
+}

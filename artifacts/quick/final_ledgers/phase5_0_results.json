@@ -1,0 +1,64 @@
+{
+  "benchmarks": {
+    "AgentDojo": {
+      "candidates": 0,
+      "explicit_negative_or_preservation_tasks": 0,
+      "forbidden_effect_predicates_available": 0,
+      "legal_collateral_action_available": 0,
+      "positive_effect_predicates_available": 0,
+      "reference_replay_available": 97,
+      "rejections": {
+        "NO_EXPLICIT_NEGATIVE_REQUIREMENT": 97
+      },
+      "total_usable_tasks": 97
+    },
+    "AppWorld": {
+      "candidates": 0,
+      "explicit_negative_or_preservation_tasks": 3,
+      "forbidden_effect_predicates_available": 0,
+      "legal_collateral_action_available": 0,
+      "positive_effect_predicates_available": 3,
+      "reference_replay_available": 136,
+      "rejections": {
+        "NEGATIVE_REQUIREMENT_AMBIGUOUS": 3,
+        "NO_EXPLICIT_NEGATIVE_REQUIREMENT": 133
+      },
+      "total_usable_tasks": 136
+    },
+    "ThinkingBox": {
+      "candidates": 2,
+      "explicit_negative_or_preservation_tasks": 5,
+      "forbidden_effect_predicates_available": 5,
+      "legal_collateral_action_available": 2,
+      "positive_effect_predicates_available": 5,
+      "reference_replay_available": 477,
+      "rejections": {
+        "NO_EXPLICIT_NEGATIVE_REQUIREMENT": 472,
+        "NO_LEGAL_COLLATERAL_ACTION": 2,
+        "ORIGINAL_FORBIDDEN_EFFECT_PRESENT": 1
+      },
+      "total_usable_tasks": 477
+    }
+  },
+  "candidate_artifact_sha256": "4c662464fea379aa37bf7ec15d93756a1fc950f9aa71a7ac7b0375ebfa9c3820",
+  "candidate_benchmarks": 1,
+  "candidate_tasks": 2,
+  "collateral_evaluator_outcomes": 0,
+  "collateral_trajectory_executions": 0,
+  "forbidden_effect_types": {
+    "unrequested_board_type_change": 1,
+    "unrequested_room_type_change": 1
+  },
+  "gate": "R4_PROGRAM_STOP_CASE_A_INSUFFICIENT_CALIBRATION_OPPORTUNITY",
+  "gate_conditions": {
+    "benchmarks_at_least_2": false,
+    "candidate_tasks_at_least_10": false,
+    "effect_types_at_least_3": false
+  },
+  "issue_pr_search_performed": false,
+  "llm_api_calls": 0,
+  "phase": "5.0",
+  "r4_specification_sha256": "a6d1473198ac94f544ba3eef3e314de71e4a5fd150fcd6be89644388431296d8",
+  "relation": "R4_FORBIDDEN_COLLATERAL_EFFECT_SENSITIVITY",
+  "total_usable_tasks": 710
+}

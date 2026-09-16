@@ -1,0 +1,51 @@
+{
+  "schema_version": "CERTCF_PUBLIC_REPRESENTATIVE_CASES_V1",
+  "scope": "metadata and expected relation outcomes only; no full benchmark replay is claimed",
+  "cases": [
+    {
+      "id": "cf6abd2_1__6_7",
+      "relation": "R1_INVARIANT",
+      "benchmark": "AppWorld",
+      "benchmark_commit": "42b5bcf3cd334fee33f0c37d02070a9f5807add5",
+      "task_id": "cf6abd2_1",
+      "transformation": "swap adjacent direct API calls at positions 6 and 7",
+      "expected_validity": "VALIDITY_CERTIFIED",
+      "expected_evaluator_relation": "INVARIANT",
+      "source_ledger": "phase0_9_retry2_results.json"
+    },
+    {
+      "id": "73833ad878d6caa2104e",
+      "relation": "R2_REJECTED_LITERAL_SIGNAL",
+      "benchmark": "AgentDojo",
+      "benchmark_commit": "357c80dea9af34323f709c3505d9e6d224654c7e",
+      "task_id": "user_task_14",
+      "transformation": "replace a prompt-grounded city argument",
+      "expected_audit_classification": "EVALUATOR_ACCEPTANCE_JUSTIFIED",
+      "expected_task_effect_defect": false,
+      "source_ledger": "phase2_2_results.json"
+    },
+    {
+      "id": "08a74904d4d180999649",
+      "relation": "R2A_TASK_CRITICAL_EFFECT",
+      "benchmark": "AgentDojo",
+      "benchmark_commit": "357c80dea9af34323f709c3505d9e6d224654c7e",
+      "task_id": "user_task_3",
+      "transformation": "replace the channel argument of send_channel_message",
+      "task_effect": "channel_message.recipient",
+      "expected_validity": "TASK_CRITICAL_VIOLATION_CERTIFIED",
+      "expected_evaluator_relation": "SENSITIVE",
+      "source_ledger": "phase2_4_results.json"
+    },
+    {
+      "id": "530b157_1",
+      "relation": "R3V2_ISOLATED_OMISSION",
+      "benchmark": "AppWorld",
+      "benchmark_commit": "42b5bcf3cd334fee33f0c37d02070a9f5807add5",
+      "task_id": "530b157_1",
+      "transformation": "remove the unique producer of one independently grounded effect",
+      "expected_validity": "CONJUNCTIVE_OMISSION_CERTIFIED",
+      "expected_evaluator_relation": "SENSITIVE",
+      "source_ledger": "phase4_6_results.json"
+    }
+  ]
+}

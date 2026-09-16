@@ -1,0 +1,124 @@
+{
+  "schema_version": "FINAL_RESULTS_LEDGER_V1",
+  "generated_from": "persisted_structured_artifacts_and_case_bundles",
+  "generated_date": "2026-09-09",
+  "program_status": "STOP_RESEARCH_PROGRAM_REVIEW_REQUIRED",
+  "case_level_recomputation": {
+    "agentdojo_r1": {
+      "case_bundles": 184,
+      "population_tasks": 26,
+      "validity_certified": 157,
+      "validity_failed": 1,
+      "validity_unknown": 26,
+      "certified_tasks": 22,
+      "certified_evaluator_pairs": {"original_pass_transformed_pass": 157}
+    },
+    "agentdojo_r2a": {
+      "case_bundles": 9,
+      "certified": 9,
+      "certified_tasks": 9,
+      "certified_evaluator_pairs": {"original_pass_perturbed_fail": 9}
+    },
+    "thinkingbox_r2a": {
+      "case_bundles": 30,
+      "population_tasks": 17,
+      "certified": 29,
+      "failed": 1,
+      "certified_tasks": 16,
+      "certified_evaluator_pairs": {"original_pass_perturbed_fail": 29}
+    },
+    "thinkingbox_r3": {
+      "case_bundles": 10,
+      "certified": 5,
+      "unknown": 5,
+      "certified_evaluator_pairs": {"original_pass_omission_fail": 5}
+    },
+    "appworld_r3v2": {
+      "case_bundles": 6,
+      "certified": 6,
+      "certified_evaluator_pairs": {"original_pass_omission_fail": 6}
+    }
+  },
+  "relations": {
+    "R1": {
+      "property": "semantic_preserving_invariance",
+      "appworld": {
+        "candidate_population_pairs": 18,
+        "candidate_population_tasks": 18,
+        "attempted": 6,
+        "certified": 5,
+        "invariant": 5,
+        "violations": 0,
+        "exclusions": {"transformation_construction_failed": 1, "not_consumed_after_stop_rule": 12}
+      },
+      "agentdojo": {
+        "population_pairs": 184,
+        "population_tasks": 26,
+        "certified_pairs": 157,
+        "covered_tasks": 22,
+        "invariant": 157,
+        "violations": 0,
+        "exclusions": {"baseline_replay_failed": 26, "final_state_mismatch": 1}
+      },
+      "status": "R1_VALIDATED_CONTROL_RELATION"
+    },
+    "R2_REJECTED": {
+      "phase2_0_candidates": {"arguments": 104, "tasks": 69},
+      "phase2_1": {"attempted": 10, "certified": 7, "sensitive": 2, "apparent_false_acceptances": 5},
+      "phase2_2_audit": {"audited": 5, "confirmed": 0, "justified": 3, "ambiguous": 1, "certificate_invalid": 1, "unknown": 0},
+      "finding": "literal_argument_mismatch_is_insufficient_evidence_of_task_semantic_failure",
+      "status": "EXPLORATORY_RELATION_REJECTED_FOR_LOW_SEMANTIC_PRECISION"
+    },
+    "R2A": {
+      "agentdojo_heldout": {"population": 9, "certified": 9, "sensitive": 9, "false_acceptance_candidates": 0, "effect_types": 6, "suites": 2},
+      "thinkingbox_full": {"candidates": 30, "tasks": 17, "baseline_pass": 30, "certified": 29, "certified_tasks": 16, "sensitive": 29, "false_acceptance_candidates": 0, "domains": 4, "effect_types": 7, "argument_types": 3},
+      "combined_certified": 38,
+      "combined_sensitive": 38,
+      "status": "R2A_VALIDATED_CROSS_BENCHMARK_RELATION"
+    },
+    "R3_R3V2": {
+      "thinkingbox_v1": {"attempted": 10, "certified": 5, "unknown": 5, "sensitive": 5, "false_acceptance_candidates": 0},
+      "diagnosis": {"decomposition_false_positive": 3, "alias_or_non_independence": 2, "omission_mechanism_failures": 0, "snapshot_predicate_mismatch": 5},
+      "thinkingbox_heldout": {"previously_unexposed_tasks": 30, "strict_candidate_tasks": 4, "strict_effects": 11, "domains": 2, "effect_types": 3},
+      "toolsandbox": {"candidate_tasks": 0, "status": "NO_GO", "reason": "NO_REFERENCE_EXECUTION"},
+      "appworld": {"strict_candidate_tasks": 6, "strict_effects": 12, "frozen_calibration_tasks": 6, "certified": 6, "sensitive": 6, "false_acceptance_candidates": 0},
+      "status": "R3_RELATION_CLOSED_FOR_LOW_VERIFIABLE_OPPORTUNITY"
+    },
+    "R4": {
+      "usable_tasks_scanned": 710,
+      "thinkingbox_candidates": 2,
+      "appworld_candidates": 0,
+      "agentdojo_candidates": 0,
+      "candidate_benchmarks": 1,
+      "forbidden_effect_types": 2,
+      "perturbation_executions": 0,
+      "evaluator_outcomes": 0,
+      "status": "R4_CLOSED_AT_OPPORTUNITY_GATE"
+    }
+  },
+  "cross_relation_findings": {
+    "machine_certification_feasible": true,
+    "naive_literal_precision_warning": true,
+    "scoped_robustness": "evaluated_systems_were_robust_to_machine_certified_relations_tested",
+    "confirmed_evaluator_defects": 0
+  },
+  "contamination": {"llm_api_calls_for_experiments": 0, "issue_pr_defect_search_performed": false},
+  "source_artifacts": [
+    "artifacts/phase0_9_retry2/results.json",
+    "artifacts/phase0_9_retry2/REPORT_ERRATA.json",
+    "artifacts/phase1_4/results.json",
+    "artifacts/phase1_4/AGGREGATION_RECOVERY_AUDIT.json",
+    "artifacts/phase2_0/results.json",
+    "artifacts/phase2_1/results.json",
+    "artifacts/phase2_2/results.json",
+    "artifacts/phase2_4/results.json",
+    "artifacts/phase3_2/results.json",
+    "artifacts/phase4_1/results.json",
+    "artifacts/phase4_2/results.json",
+    "artifacts/phase4_3/results.json",
+    "artifacts/phase4_4/results.json",
+    "artifacts/phase4_5/results.json",
+    "artifacts/phase4_6/results.json",
+    "artifacts/phase5_0/results.json"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "corrected_value": 5,
+  "correction_basis": "Five persisted VALIDITY_CERTIFIED case records have unique target API response traces; the sixth attempted case failed transformation construction before tracing.",
+  "experimental_result_changed": false,
+  "field": "unique target-trace alignment success",
+  "protocol_changed": false,
+  "reported_value": 6
+}

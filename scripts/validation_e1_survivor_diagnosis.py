@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Diagnose E1 survivors without changing the frozen E1 experiment."""
+"""Diagnose E1 modeled-fault survivors without changing the frozen study.
+
+This is a persisted-evidence analysis, not implementation-level source
+mutation and re-execution. Legacy ``mutant`` field names remain for ledger
+compatibility.
+"""
 
 from __future__ import annotations
 
