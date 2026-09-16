@@ -36,5 +36,21 @@
     "executed": 0,
     "strict_static_candidates": 2,
     "usable_tasks": 710
+  },
+  "e2": {
+    "historical_pairs": 49,
+    "violations": 43,
+    "satisfied": 3,
+    "ambiguous": 1,
+    "insufficient": 2,
+    "full_gate_retained": 38,
+    "full_gate_determinate_validity": "37/37",
+    "full_gate_retained_labeled_violations": "37/43"
+  },
+  "e3": {
+    "appworld_cases": 6,
+    "semantic_violations": 6,
+    "certified": 6,
+    "sensitive": 6
   }
 }

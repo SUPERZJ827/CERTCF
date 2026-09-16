@@ -1,0 +1,36 @@
+{
+  "schema_version": "CERTCF_E3_FINAL_ADJUDICATION_V1",
+  "source_artifact": "validation_llm_adjudication_claude_v1/FINAL_RESULTS.json",
+  "source_sha256": "4eb07d66b7ae3cc586ff4e7faa197f4294948ea1b68c97d782e02a33a0577054",
+  "coverage": {
+    "appworld_cases": 6,
+    "completed_adjudications": 6,
+    "adjudication_status": "LLM_ADJUDICATION_COMPLETE_HUMAN_VALIDATION_PENDING"
+  },
+  "semantic_labels": {
+    "violations": 6
+  },
+  "full_gate": {
+    "retained_total": 6,
+    "retained_determinate_total": 6,
+    "retained_determinate_violations": 6,
+    "determinate_retained_validity": "6/6",
+    "retained_labeled_violation_fraction": "6/6",
+    "retained_labeled_violation_rate": 1.0
+  },
+  "certificate_and_evaluator_relation": {
+    "certified": 6,
+    "sensitive": 6,
+    "effect_family": "spotify.playlists.title"
+  },
+  "adjudication": {
+    "requested_model": "claude-sonnet-4-6",
+    "model_usage_recorded": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-4-6"
+    ],
+    "role": "AUXILIARY_BLINDED_LLM_ADJUDICATION_NOT_HUMAN_GOLD"
+  },
+  "supersedes": "validation_e3_retry1_results.json",
+  "superseded_artifact_status": "historical execution ledger; semantic adjudication field was pending"
+}

@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER_DIR = ROOT / "artifacts" / "quick" / "final_ledgers"
 LEDGER = LEDGER_DIR / "results_ledger.json"
 R2_SCAN = LEDGER_DIR / "phase2_0_results.json"
+E2_FINAL = LEDGER_DIR / "validation_e2_final_results.json"
+E3_FINAL = LEDGER_DIR / "validation_e3_final_results.json"
 EXPECTED = ROOT / "artifacts" / "quick" / "expected_outputs" / "headline_counts.json"
 
 
@@ -76,6 +78,24 @@ def main() -> int:
     actual["r2"]["arguments_scanned"] = r2_scan["total_gt_arguments"]
     actual["r2"]["literal_candidates"] = r2_scan["candidate_arguments"]
     actual["r2"]["candidate_tasks"] = r2_scan["candidate_tasks"]
+    e2 = load(E2_FINAL)
+    e3 = load(E3_FINAL)
+    actual["e2"] = {
+        "historical_pairs": e2["coverage"]["historical_pairs"],
+        "violations": e2["semantic_labels"]["violations"],
+        "satisfied": e2["semantic_labels"]["satisfied"],
+        "ambiguous": e2["semantic_labels"]["ambiguous"],
+        "insufficient": e2["semantic_labels"]["insufficient"],
+        "full_gate_retained": e2["full_gate"]["retained_total"],
+        "full_gate_determinate_validity": e2["full_gate"]["determinate_retained_validity"],
+        "full_gate_retained_labeled_violations": e2["full_gate"]["retained_labeled_violation_fraction"],
+    }
+    actual["e3"] = {
+        "appworld_cases": e3["coverage"]["appworld_cases"],
+        "semantic_violations": e3["semantic_labels"]["violations"],
+        "certified": e3["certificate_and_evaluator_relation"]["certified"],
+        "sensitive": e3["certificate_and_evaluator_relation"]["sensitive"],
+    }
     expected = load(EXPECTED)
     if actual != expected:
         print("PUBLIC LEDGER CHECK: FAILED")

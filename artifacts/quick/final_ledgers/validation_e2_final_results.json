@@ -1,0 +1,38 @@
+{
+  "schema_version": "CERTCF_E2_FINAL_ADJUDICATION_V1",
+  "source_artifact": "validation_llm_adjudication_claude_v1/FINAL_RESULTS.json",
+  "source_sha256": "4eb07d66b7ae3cc586ff4e7faa197f4294948ea1b68c97d782e02a33a0577054",
+  "coverage": {
+    "historical_pairs": 49,
+    "completed_adjudications": 49,
+    "adjudication_status": "LLM_ADJUDICATION_COMPLETE_HUMAN_VALIDATION_PENDING"
+  },
+  "semantic_labels": {
+    "violations": 43,
+    "satisfied": 3,
+    "ambiguous": 1,
+    "insufficient": 2
+  },
+  "full_gate": {
+    "retained_total": 38,
+    "retained_determinate_total": 37,
+    "retained_determinate_violations": 37,
+    "retained_labeled_violations": 37,
+    "labeled_violations_total": 43,
+    "determinate_retained_validity": "37/37",
+    "retained_labeled_violation_fraction": "37/43",
+    "retained_labeled_violation_rate": 0.8604651162790697,
+    "retained_ambiguous": 1,
+    "retained_insufficient": 0
+  },
+  "adjudication": {
+    "requested_model": "claude-sonnet-4-6",
+    "model_usage_recorded": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-4-6"
+    ],
+    "role": "AUXILIARY_BLINDED_LLM_ADJUDICATION_NOT_HUMAN_GOLD"
+  },
+  "supersedes": "validation_e2_results.json",
+  "superseded_artifact_status": "historical preliminary artifact; only 5 of 49 cases labeled"
+}

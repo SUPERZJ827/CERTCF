@@ -24,8 +24,8 @@ experiment.
 | Result | Compact source | Status and boundary |
 |---|---|---|
 | E1 | `validation_e1_results.json` | Modeled-fault controls applied to persisted evidence; 68 of 102 activated instances distinguished; no source mutation or official evaluator rerun |
-| E2 | `validation_e2_results.json` | Retrospective four-gate analysis of 49 historical pairs; incomplete independent adjudication and phase confounding |
-| E3 | `validation_e3_retry1_results.json` | Six previously unexposed AppWorld cases in one playlist-title effect family; all six certified and sensitive; no cross-family claim |
+| E2 | `validation_e2_final_results.json` (derived from `validation_llm_adjudication_claude_v1/FINAL_RESULTS.json`) | Final 49-pair auxiliary adjudication: 43 violations, 3 satisfied, 1 ambiguous, 2 insufficient; full gate retains 38 total, including 37/37 determinate valid cases and 37/43 labeled violations. `validation_e2_results.json` is preserved as the historical preliminary five-labeled/44-unlabeled artifact. |
+| E3 | `validation_e3_final_results.json` (derived from `validation_llm_adjudication_claude_v1/FINAL_RESULTS.json`) | Final auxiliary adjudication for six AppWorld task IDs: all six labeled violations; all six certified and evaluator-sensitive in the single playlist-title effect family. `validation_e3_retry1_results.json` is preserved as the historical execution ledger whose semantic-adjudication field was pending. |
 | E4 | `docs/ARTIFACT_COMPLETENESS_AUDIT.md` | Failed strengthening attempt documented only; no new source mutants executed |
 | Independent-truth bridge | final ledger and audit notes | Stopped before mutation because an independent common truth pool was not established |
 
